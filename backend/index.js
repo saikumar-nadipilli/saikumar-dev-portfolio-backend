@@ -7,7 +7,11 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // or "*" for all origins
+  })
+);
 app.use(bodyParser.json());
 
 // POST /api/contact route
