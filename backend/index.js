@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -7,9 +8,14 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware
+console.log("Frontend URL:", process.env.FRONTEND_URL);
 app.use(
   cors({
-    origin: "http://localhost:5173", // or "*" for all origins
+    origin: [
+      "http://localhost:5173",
+      "https://saikumar-dev-portfolio-frontend.vercel.app",
+      process.env.FRONTEND_URL,
+    ], // or "*" for all origins
   })
 );
 app.use(bodyParser.json());
