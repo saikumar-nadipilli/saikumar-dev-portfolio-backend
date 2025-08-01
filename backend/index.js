@@ -9,7 +9,7 @@ const port = process.env.PORT || 3001;
 // Middleware
 app.use(
   cors({
-    origin: "*", // or "*" for all origins
+    origin: "http://localhost:5173", // or "*" for all origins
   })
 );
 app.use(bodyParser.json());
