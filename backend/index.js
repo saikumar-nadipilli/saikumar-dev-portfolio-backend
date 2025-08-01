@@ -9,13 +9,23 @@ const port = process.env.PORT || 3001;
 
 // Middleware
 console.log("Frontend URL:", process.env.FRONTEND_URL);
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://saikumar-dev-portfolio-frontend.vercel.app",
+  process.env.FRONTEND_URL,
+].filter(Boolean); // removes undefined/null
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://saikumar-dev-portfolio-frontend.vercel.app",
-      process.env.FRONTEND_URL,
-    ], // or "*" for all origins
+    origin: function (origin, callback) {
+      // allow requests like Postman or curl with no origin
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
   })
 );
 app.use(bodyParser.json());
