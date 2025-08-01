@@ -1,3 +1,4 @@
+require("dotenv").config();
 const nodemailer = require("nodemailer");
 
 // Email configuration
@@ -19,7 +20,7 @@ const sendContactEmail = async (event, context) => {
       name,
       email,
       subject,
-      messageLength: message.length,
+      message: message,
     });
 
     // Validate required fields
